@@ -11,7 +11,6 @@ void moveZeroes(vector<int>& nums)
             zeroIndex++;
         }
     }
-    for(auto it:nums) cout<<it<<" ";
-    cout<<endl;
+    
     return;
 }

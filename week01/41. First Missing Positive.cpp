@@ -21,24 +21,31 @@ int ky[] = {2,-2,1,-1,2,-2,1,-1};
 
 int firstMissingPositive(vector<int>& nums) 
 {
-	for(int i=0;i<nums.size();i++)
+	bool oneExist = 0;
+	int maxElement = nums.size()-1;
+	int len = nums.size();
+
+	for(int i=0;i<len;i++)
 	{
-		while(nums[i]!=i+1 && nums[i]!=-1)
-		{
-			if(nums[i]<1 || nums[i]>nums.size())
-				nums[i]=-1;
-			else if(nums[i]==nums[nums[i]-1]) break;
-            else 
-                swap(nums[i],nums[nums[i]-1]);//0(1)
-		}
+		if(nums[i]==1) oneExist = 1;
+		else if(nums[i]>maxElement || nums[i]<1) nums[i] = 1;
 	}
-	for(int i=0;i<nums.size();i++)//0(n)
+		
+	if(!oneExist) return 1;
+
+	for(int i = 0;i<len;i++)
 	{
-		if(nums[i]<0) return i+1;
+		nums[abs(nums[i])]= -nums[nums[i]];
+	}
+		
+	for(int i=0;i<len;i++)
+	{
+		if(nums[i]>0) return i+1;
 	}
 
-	return nums.size()+1;
+	return 0;
 }
+
 
 int main()
 {
